@@ -26,7 +26,7 @@ Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 Adafruit_StepperMotor *myMotor = AFMS.getStepper(STEP_REV, STEP_CH);
 
 // function prototypes
-void init_valve();  // initialize the LED, coils and TODO: default position.
+void init_valve();  // initialize the LED and the coils.
 void open_valve();  // opens valve, decreases pressure.
 void close_valve(); // close valve, increase pressure.
 void clear_clog();  // clog occured, clear the valve.
@@ -77,7 +77,7 @@ void setup()  // Setup called once in every program to initialize everything.
     sensorValue = analogRead(PRESSURE); // the initial pressure.
     targetPressure = sensorValue;       // the initial target pressure.
 
-    init_valve(); // initialize the LED, coils and TODO: default position
+    init_valve(); // initialize the LED and coils 
 } // end setup
 
 /******************************************************************************

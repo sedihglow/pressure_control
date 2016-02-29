@@ -12,10 +12,8 @@
 #include <Wire.h>  
 #include <Adafruit_PWMServoDriver.h>
 #include <Adafruit_MotorShield.h>
-#include "adaStep01.h"
+#include "adaStep02.h"
 
-/* TODO: Once all pressure values are honed and tested: If targetPressure or
-         sensorValue never utilizes float, make integers. */
 volatile float targetPressure = 682.0;  // Arbitrarily set to about 3000psi.
 float sensorValue = 0.0;                // Return value from pressure read.
 int16_t openStepCount = 0;              // count from starting position opened
@@ -61,10 +59,9 @@ void setup()  // Setup called once in every program to initialize everything.
     myMotor->setSpeed(XXRPM);
     myMotor->release(); 
 
-
-    pinMode(PRESSURE, INPUT);   // pressure reading from sensor
-    pinMode(BUTTON_DN, INPUT);  // pressure increase button
-    pinMode(BUTTON_UP, INPUT);  // pressure decrease button
+    pinMode(PRESSURE,   INPUT); // pressure reading from sensor
+    pinMode(BUTTON_DN,  INPUT); // pressure increase button
+    pinMode(BUTTON_UP,  INPUT); // pressure decrease button
     pinMode(BUTTON_OFF, INPUT); // sepper motor off button
     
     pinMode(MOTOR_LED, OUTPUT); // motor power green LED
@@ -103,7 +100,7 @@ void loop()
         }//end else if
     }// end while 
 
-    while((sensorValue = analogRead(PRESSURE)) > targetPressure){
+    while((sensorValue = analogRead(PRESSURE)) < targetPressure){
         close_valve();
         DEBUG_STATE_PRINT("LOW", targetPressure, sensorValue);
     } //end if
@@ -138,8 +135,7 @@ void open_valve(){
 *                       VOID CLOSE_VALVE:
 ******************************************************************************/
 void close_valve(){
-    if(openStepCount > 0)
-    {
+    if(openStepCount > 0){
         myMotor->step(CLOSE_STEP, FORWARD, INTERLEAVE);  
         DEBUG_PRINTNL("CLOSING Valve, Increasing Pressure");
         --openStepCount;
