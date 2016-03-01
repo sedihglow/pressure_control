@@ -24,39 +24,45 @@
     #define DEBUG_PRINTNL(toPrint)
 #endif
 
-
 // Arduino values
-#define SERIAL_V         115200  // speed of serial connection
-
-// Clog values  // TODO: CLOG_OFFSET value might be wrong for diff pully
-#define CLOG_OFFSET      36.0  // offset from a target value showing a clog
-#define CLOG_VAL(target) ((target)+CLOG_OFFSET) //value when clogged
-#define DIST_TGT(target,sensor) abs((target)-(sensor)) // distance from target
+#define SERIAL_V     115200  // speed of serial connection
 
 // Motor values
-#define STEP_REV    200  // steps per revolution on the motor
-#define STEP_CH     2    // associated stepper channel for the motor
-#define XXRPM       60   // setup xx rpm of motor.
-#define MAN_MAX     70   // max the valve will manually open with switch
+#define STEP_REV     200  // steps per revolution on the motor
+#define STEP_CH      2    // associated stepper channel for the motor
+#define XXRPM        60   // setup xx rpm of motor.
+#define MAN_MAX      70   // max the valve will manually open with switch
+
+// Step levels
+#define LVL_ZERO     5    // standard step size
+#define LVL_ONE      10   // first step size level
+#define LVL_TWO      20   // second step size level
+#define LVL_THREE    30   // third step size level
+#define LVL_FOUR     50   // fourth step size level
+
+// offset from desired target pressure
+#define OFFSET_ONE   10 
+#define OFFSET_TWO   20 
+#define OFFSET_THREE 36
+#define OFFSET_FOUR  50
+
+#define DIST_TGT(target,sensor) abs((target)-(sensor)) // distance from target
 
 // Step sizes
-#define INIT_STEP   1   // initial steps for coils 
-#define SINGLE_STEP 1   // single step
-#define CLOSE_STD  5    // close valve
-#define OPEN_STD   5    // open valve
-#define AGG_OPEN   20   // open and close value for clog removal
-#define AGG_CLOSE  20
+#define INIT_STEP   1     // initial steps for coils 
+#define SINGLE_STEP 1     // single step
+#define QCK_STEP    10    // quick step above single step
 
 // ISR targetPressure granularity // saved for future version
 //#define INC_TARGET  1   // increase ammount
 //#define DEC_TARGET  1   // decrease ammount
 
 // Physical pins:
-#define PRESSURE    A0  // ANALOG INPUT FOR PRESSURE SENSOR
-#define BUTTON_DN   2   // DECREASE PRESSURE
-#define BUTTON_UP   3   // INCREASE PRESSURE
-#define BUTTON_OFF  4   // DISABLE/ENABLE MOTOR
-#define MOTOR_LED   5   // MOTOR POWER INDICATOR LED
+#define PRESSURE    A0    // ANALOG INPUT FOR PRESSURE SENSOR
+#define BUTTON_DN   2     // DECREASE PRESSURE
+#define BUTTON_UP   3     // INCREASE PRESSURE
+#define BUTTON_OFF  4     // DISABLE/ENABLE MOTOR
+#define MOTOR_LED   5     // MOTOR POWER INDICATOR LED
 /******************************************************************************
 *                               EOF
 ******************************************************************************/

@@ -127,7 +127,6 @@ void loop()
     }//end if
     else{
         init_valve();
-        sensorValue = analogRead(PRESSURE);
      
 
         while(0 == digitalRead(BUTTON_DN) || 0 == digitalRead(BUTTON_UP)){
@@ -143,6 +142,7 @@ void loop()
             }//end else if
         }//end while
 //******************* Check for a pressure clog *******************************
+    sensorValue = analogRead(PRESSURE);
     if(DIST_TGT(targetPressure, sensorValue) < CLOG_VAL(targetPressure)){ 
         aggro = false;
     }//end if 
