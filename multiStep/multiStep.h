@@ -35,16 +35,18 @@
 
 // Step levels
 #define LVL_ZERO     5    // standard step size
-#define LVL_ONE      10   // first step size level
-#define LVL_TWO      20   // second step size level
-#define LVL_THREE    30   // third step size level
-#define LVL_FOUR     50   // fourth step size level
+#define LVL_ONE      10
+#define LVL_TWO      20
+#define LVL_THREE    40
+#define LVL_FOUR     50
+#define LVL_FIVE     60
 
 // offset from desired target pressure
 #define OFFSET_ONE   10 
 #define OFFSET_TWO   20 
 #define OFFSET_THREE 36
 #define OFFSET_FOUR  50
+#define OFFSET_FIVE  60
 
 #define DIST_TGT(target,sensor) abs((target)-(sensor)) // distance from target
 

@@ -12,7 +12,7 @@
 #include <Wire.h>  
 #include <Adafruit_PWMServoDriver.h>
 #include <Adafruit_MotorShield.h>
-#include "aggroStep.h"
+#include "multiStep.h"
 
 int16_t targetPressure = 0;   // Arbitrarily set to about 3000psi.
 int16_t sensorValue    = 0;   // Return value from pressure read.
@@ -147,9 +147,10 @@ bool step_level(){
     int16_t dist = DIST_TGT(targetPressure, sensorValue);
     DEBUG_STATE_PRINT("STEP_CHECK", targetPressure, sensorValue);
     if     (dist < OFFSET_ONE  ) {  return LVL_ZERO;  }
+    else if(dist > OFFSET_FIVE ) {  return LVL_FIVE;  }
     else if(dist > OFFSET_FOUR ) {  return LVL_FOUR;  }
     else if(dist > OFFSET_THREE) {  return LVL_THREE; }
-    else if(dist > OFFSET_FOUR ) {  return LVL_FOUR;  }
+    else if(dist > OFFSET_TWO  ) {  return LVL_TWO;   }
     else if(dist > OFFSET_ONE  ) {  return LVL_ONE;   }
 }// end aggro_check
 
@@ -172,7 +173,7 @@ void close_valve(int16_t stepSize){
             openStepCount -= stepSize;
         }//end if
         else{ // fully close the valve
-            while(openStepCount >= QCK_STEP){ // quick close
+            while(openStepCount > QCK_STEP){ // quick close
                 myMotor->step(SINGLE_STEP, FORWARD, INTERLEAVE);
                 openStepCount -= QCK_STEP;
             }//end while
