@@ -19,7 +19,9 @@ int16_t sensorValue    = 0;   // Return value from pressure read.
 int16_t openStepCount  = 0;   // count from starting position opened.
 int16_t manualOpenStep = 0;   // The steps manually opening valve occured.
 int16_t stepLvl        = 0;   // the corresponding step level for pressure
-bool motorPower        = LOW; // keep motor off/on
+bool    switchDn       = 0;   // active low switch flag, toggle down
+bool    switchUp       = 0;   // active low switch flag, toggle up
+bool    motorPower     = LOW; // keep motor off/on
 
 // shield object
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
@@ -28,7 +30,7 @@ Adafruit_StepperMotor *myMotor = AFMS.getStepper(STEP_REV, STEP_CH);
 
 // function prototypes
 void init_valve();                  // initialize the LED, coils 
-int16_t step_level();               // check if an aggro step is required
+int16_t step_level();               // check what step size is required
 void open_valve(int16_t stepSize);  // opens valve, decreases pressure.
 void close_valve(int16_t stepSize); // close valve, increase pressure.
 void clear_clog();                  // clog occured, clear the valve.
@@ -135,14 +137,14 @@ void init_valve(){
         myMotor->step(INIT_STEP, BACKWARD, INTERLEAVE);
         delay(1);
         myMotor->step(INIT_STEP, FORWARD, INTERLEAVE);
-        motor = true;
+        motorPower = true;
     }//end if 
 }// end init_valve
 
 /******************************************************************************
 *                       BOOL AGGRO_CHECK:
 ******************************************************************************/
-bool step_level(){
+int16_t step_level(){
 //******************* Check for a pressure build ******************************
     int16_t dist = DIST_TGT(targetPressure, sensorValue);
     DEBUG_STATE_PRINT("STEP_CHECK", targetPressure, sensorValue);
@@ -152,7 +154,7 @@ bool step_level(){
     else if(dist > OFFSET_THREE) {  return LVL_THREE; }
     else if(dist > OFFSET_TWO  ) {  return LVL_TWO;   }
     else if(dist > OFFSET_ONE  ) {  return LVL_ONE;   }
-}// end aggro_check
+}// end step_level
 
 /******************************************************************************
 *                       VOID OPEN_VALVE:

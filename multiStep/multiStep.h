@@ -34,19 +34,19 @@
 #define MAN_MAX      70   // max the valve will manually open with switch
 
 // Step levels
-#define LVL_ZERO     5    // standard step size
-#define LVL_ONE      10
-#define LVL_TWO      20
-#define LVL_THREE    40
-#define LVL_FOUR     50
-#define LVL_FIVE     60
+#define LVL_ZERO     1    // standard step size
+#define LVL_ONE      5
+#define LVL_TWO      10
+#define LVL_THREE    20
+#define LVL_FOUR     30
+#define LVL_FIVE     50
 
-// offset from desired target pressure
-#define OFFSET_ONE   10 
-#define OFFSET_TWO   20 
-#define OFFSET_THREE 36
-#define OFFSET_FOUR  50
-#define OFFSET_FIVE  60
+// offset from desired target pressure reading
+#define OFFSET_ONE   5 
+#define OFFSET_TWO   10 
+#define OFFSET_THREE 25
+#define OFFSET_FOUR  36
+#define OFFSET_FIVE  56
 
 #define DIST_TGT(target,sensor) abs((target)-(sensor)) // distance from target
 
