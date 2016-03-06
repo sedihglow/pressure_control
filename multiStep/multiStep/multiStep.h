@@ -34,19 +34,19 @@
 #define MAN_MAX      70   // max the valve will manually open with switch
 
 // Step levels
-#define LVL_ZERO     1
+#define LVL_ZERO     1    // standard step size
 #define LVL_ONE      3
-#define LVL_TWO      4
-#define LVL_THREE    5
-#define LVL_FOUR     7
-#define LVL_FIVE     10
+#define LVL_TWO      5
+#define LVL_THREE    10
+#define LVL_FOUR     15
+#define LVL_FIVE     25
 
 // offset from desired target pressure reading
-#define OFFSET_ONE   2 
-#define OFFSET_TWO   3 
-#define OFFSET_THREE 4
-#define OFFSET_FOUR  7
-#define OFFSET_FIVE  12
+#define OFFSET_ONE   5 
+#define OFFSET_TWO   10 
+#define OFFSET_THREE 15
+#define OFFSET_FOUR  23
+#define OFFSET_FIVE  36
 
 #define DIST_TGT(target,sensor) abs((target)-(sensor)) // distance from target
 
@@ -54,7 +54,6 @@
 #define INIT_STEP   1     // initial steps for coils 
 #define SINGLE_STEP 1     // single step
 #define QCK_STEP    10    // quick step above single step
-#define RE_CLOSE    5     // buffer to reset the closed valve mark
 
 // ISR targetPressure granularity // saved for future version
 //#define INC_TARGET  1   // increase ammount

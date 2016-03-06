@@ -8,7 +8,7 @@
 *activating a stepper controlled preseure relief valve.
 ***********************************************************/
  
-//#define DEBUG 1    //comment out to suppress debug prints
+ #define DEBUG 1    //comment out to suppress debug prints
 #include <Wire.h>  
 #include <Adafruit_PWMServoDriver.h>
 #include <Adafruit_MotorShield.h>
@@ -113,7 +113,6 @@ void loop(){
     
     if(true == manualInit){ // if manual open was engaged
         targetPressure = analogRead(PRESSURE);
-        close_valve(manualOpenStep);
         manualOpenStep = 0;
         manualInit = false;
     }// end if 
@@ -155,7 +154,7 @@ void init_valve(){
 }// end init_valve
 
 /******************************************************************************
-*                       int16_t step_level:
+*                       BOOL AGGRO_CHECK:
 ******************************************************************************/
 int16_t step_level(){
 //******************* Check for a pressure build ******************************
@@ -189,7 +188,7 @@ void close_valve(int16_t stepSize){
         }//end if
         else{ // fully close the valve
             while(openStepCount > QCK_STEP){ // quick close
-                myMotor->step(QCK_STEP, FORWARD, INTERLEAVE);
+                myMotor->step(SINGLE_STEP, FORWARD, INTERLEAVE);
                 openStepCount -= QCK_STEP;
             }//end while
             while(openStepCount > 0){ // single step to fully closed
