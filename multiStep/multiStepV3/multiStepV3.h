@@ -1,13 +1,13 @@
 /***********************************************************
 *JAMES ROSS
 *6 FEBRUARY 2016
-*CLIENT: 
 *PROJECT: PSI pressure value w/ stepper motor.
 *
 *ABSTRACT: Header file defining pin assignments and 
 *common values used througout the program.
 ***********************************************************/
-// Debug print macros
+
+//************** Debug print macros ********************************************
 #ifdef DEBUG
     #define DEBUG_STATE_PRINT(state, target, sens){                            \
         Serial.print("Pressure " state " , Target: ");                         \
@@ -33,7 +33,9 @@
 #define STEP_REV     200  // steps per revolution on the motor
 #define STEP_CH      2    // associated stepper channel for the motor
 #define XXRPM        60   // setup xx rpm of motor.
-#define MAN_MAX      70   // max the valve will manually open with switch
+#define MAN_MAX_LRG  250  // max the valve will manually open with switch large
+#define MAN_MAX_SML  150  // max the valve will manually open with switch small
+#define SET_MAN_PR   465  // value for a point of pressure for manual op.
 
 // Step levels
 #define LVL_ZERO     1
@@ -58,7 +60,7 @@
 #define INIT_STEP    1    // initial steps for coils 
 #define SINGLE_STEP  1    // single step
 #define QCK_STEP     10   // quick step above single step
-#define RE_CLOSE     5    // buffer to reset the closed valve mark
+#define DBL_QCK_STEP 20   // double the above step. note: Manually maintained.
 
 // ISR targetPressure granularity // saved for future version
 //#define INC_TARGET  1   // increase ammount
